@@ -409,7 +409,7 @@ def post_detail(request, year, month, day, post):
 
         new_comment.save()
     ​    
-我们的视图（view）已经准备好显示和处理新的评论了。
+    我们的视图（view）已经准备好显示和处理新的评论了。
 
 ##在帖子详情模板（template）中添加评论
 
@@ -604,15 +604,15 @@ def post_list(request, tag_slug=None):
        tag = get_object_or_404(Tag, slug=tag_slug)
        object_list = object_list.filter(tags__in=[tag])
        
-   paginator = Paginator(object_list, 3) # 3 posts in each page
+   paginator = Paginator(object_list, 3) # 3 posts in each page  每一页显示的数量
    page = request.GET.get('page')
    try:
-       posts = paginator.page(page)
+       posts = paginator.page(page)		
    except PageNotAnInteger:
-       # If page is not an integer deliver the first page
+       # If page is not an integer deliver the first page	获取到的page不是整型，就返回第一页对象
        posts = paginator.page(1)
    except EmptyPage:
-       # If page is out of range deliver last page of results
+       # If page is out of range deliver last page of results 如果为空，就返回最后一页对象
        posts = paginator.page(paginator.num_pages)
    return render(request, 'blog/post/list.html', {'page': page,
                                                   'posts': posts,
